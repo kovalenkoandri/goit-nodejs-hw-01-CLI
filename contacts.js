@@ -1,33 +1,27 @@
-const fs = require('fs');
+const fs = require('fs').promises;
 const path = require('node:path').posix;
 const contactsPath = path.posix.format({ base: 'db/contacts.json' });
-
-function listContacts() {
-  fs.readFile(contactsPath, 'utf8', function (err, data) {
-    // Display the file content
-    console.log(data);
-  });
-}
+const products = require('./db/contacts.json');
+const getAll = async () => products;
+  function listContacts() {
+    fs.readFile(contactsPath)
+      .then((data) => console.log(data.toString()))
+      .catch((err) => console.log(err.message));
+  };
 
 function getContactById(contactId) {
-  fs.readFile(contactsPath, 'utf8', function (error, data) {
-    // Display the file content
-    // data.forEach((element) => {
-    // console.log(element);
-    // });
-    if (error) throw error;
-    else {
-      const content = data;
-      processFile(content, contactId);  
-      console.log(data[0]);
-    }
-
-    // data.find((el) => el.id === contactId);
+  const promise = new Promise((resolve, reject) => {
+    resolve(getAll());
+    reject('Error! Error passed to reject function');
   });
+  promise
+    .then((data) => {
+      const found = data.find((el) => el.id === contactId.toString());
+      console.log(found);
+    })
+    .catch((err) => console.log(err.message));
 }
-function processFile(content, contactId) {
-  console.log(content);
-}
+
 getContactById(5);
 // function removeContact(contactId) {
 //   // ...твой код
