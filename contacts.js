@@ -9,11 +9,13 @@ const getAll = async () => products;
       .catch((err) => console.log(err.message));
   };
 
-function getContactById(contactId) {
-   Promise.resolve(getAll()).then((data) => {
-      const found = data.find((el) => el.id === contactId.toString());
-      console.log(found);
-    })
+async function getContactById(contactId) {
+    const products = await getAll();
+    const product = products.find((item) => item.id === contactId.toString());
+    if(!product) {
+        return null;
+    }
+    return console.log(product);
 }
 
 // function removeContact(contactId) {
