@@ -14,10 +14,8 @@ function getContactById(contactId) {
       const found = data.find((el) => el.id === contactId.toString());
       console.log(found);
     })
-    .catch((err) => console.log(err.message));
 }
 
-getContactById(5);
 // function removeContact(contactId) {
 //   // ...твой код
 // }
@@ -27,4 +25,5 @@ getContactById(5);
 // }
 module.exports = {
   listContacts,
+  getContactById,
 };
