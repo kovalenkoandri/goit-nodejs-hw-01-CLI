@@ -10,12 +10,7 @@ const getAll = async () => products;
   };
 
 function getContactById(contactId) {
-  const promise = new Promise((resolve, reject) => {
-    resolve(getAll());
-    reject('Error! Error passed to reject function');
-  });
-  promise
-    .then((data) => {
+   Promise.resolve(getAll()).then((data) => {
       const found = data.find((el) => el.id === contactId.toString());
       console.log(found);
     })
