@@ -30,7 +30,7 @@ async function removeContact(contactId) {
   const deleteProduct = products.splice(index, 1);
   await fs.writeFile(
     contactsPath,
-    JSON.stringify([...products, deleteProduct])
+    JSON.stringify( [...products])
   );
 }
 
