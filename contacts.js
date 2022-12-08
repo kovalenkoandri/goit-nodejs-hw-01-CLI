@@ -19,8 +19,17 @@ async function getContactById(contactId) {
   return console.log(product);
 }
 
-function removeContact(contactId) {
-  // ...твой код
+async function removeContact(contactId) {
+  const products = await getAll();
+  const contactIdCheck = products.find(
+    (item) => item.id === contactId.toString(),
+  );
+  if (!contactIdCheck) throw new Error('this contactId does NOT exists');
+  const index = products.findIndex(
+    (item) => item.id === contactId.toString(),
+  );
+  const deleteProduct = products.splice(index, 1);
+  await fs.writeFile(contactsPath, JSON.stringify([...products, deleteProduct]));
 }
 
 async function addContact(name, email, phone) {
@@ -41,4 +50,5 @@ module.exports = {
   listContacts,
   getContactById,
   addContact,
+  removeContact,
 };
