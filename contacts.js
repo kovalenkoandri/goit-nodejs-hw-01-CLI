@@ -25,27 +25,45 @@ async function removeContact(contactId) {
   const contactIdCheck = products.find(
     item => item.id === contactId.toString()
   );
-  if (!contactIdCheck) throw new Error('this contactId does NOT exists');
+  if (!contactIdCheck) {
+    console.log('this contactId does NOT exists');
+    return null;
+  }
   const index = products.findIndex(item => item.id === contactId.toString());
-  const deleteProduct = products.splice(index, 1);
-  await fs.writeFile(
-    contactsPath,
-    JSON.stringify( [...products])
-  );
+  products.splice(index, 1);
+  await fs.writeFile(contactsPath, JSON.stringify([...products]));
 }
 
 async function addContact(name, email, phone) {
-  if (!name) throw new Error('name missing');
-  if (!email) throw new Error('email missing');
-  if (!phone) throw new Error('phone missing');
+  if (!name) {
+    console.log('name missing');
+    return null;
+  }
+  if (!email) {
+    console.log('email missing');
+    return null;
+  }
+  if (!phone) {
+    console.log('phone missing');
+    return null;
+  }
   const products = await getAll();
   const nameCheck = products.find(item => item.name === name.toString());
-  if (nameCheck) throw new Error('this name already exists');
+  if (nameCheck) {
+    console.log('this name already exists');
+    return null;
+  }
   const emailCheck = products.find(item => item.email === email.toString());
-  if (emailCheck) throw new Error('this email already exists');
+  if (emailCheck) {
+    console.log('this email already exists');
+    return null;
+  }
   const phoneCheck = products.find(item => item.phone === phone.toString());
-  if (phoneCheck) throw new Error('this phone already exists');
-  const newProduct = { id: v4(2), name, email, phone };
+  if (phoneCheck) {
+    console.log('this phone already exists');
+    return null;
+  }
+  const newProduct = { id: v4(), name, email, phone };
   await fs.writeFile(contactsPath, JSON.stringify([...products, newProduct]));
 }
 module.exports = {

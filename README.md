@@ -13,8 +13,8 @@ https://monosnap.com/file/AK9apvL77dA6yRn8LKQg6Rfg5EE90s
 
 # Добавялем контакт
 
-node index.js --action add --name Mango --email mango@gmail.com --phone
-322-22-22 https://monosnap.com/file/jOpk8nKNxmckPiVVWImsbJ4E3Uj7lD
+node index.js --action add --name Mango --email mango@gmail.com --phone 322-22-22
+https://monosnap.com/file/jOpk8nKNxmckPiVVWImsbJ4E3Uj7lD
 
 # Удаляем контакт
 
